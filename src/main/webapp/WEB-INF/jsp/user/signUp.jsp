@@ -44,3 +44,92 @@
 		</form>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		// 아이디 중복확인 버튼
+		$('#loginIdCheckBtn').on('click', function() {
+			$('#idCheckLength').addClass('d-none');
+			$('#idCheckDuplicated').addClass('d-none');
+			$('#idCheckOk').addClass('d-none');
+			
+			let loginId = $('input[name=loginId]').val().trim();
+			
+			if (loginId.length < 4) {
+				$('#idCheckLength').removeClass('d-none');
+				return;
+			}
+			
+			$.ajax({
+				url:"/user/is_duplicated_id"
+				, data:{"loginId":loginId}
+				
+				, success:function(data) {
+					if (data.code == 1) {
+						if (data.result) {
+							$('#idCheckDuplicated').removeClass('d-none');
+						} else {
+							$('#idCheckOk').removeClass('d-none');
+						}
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("중복확인에 실패했습니다.");
+				}
+			});
+		});
+		
+		$('#signUpBtn').on('click', function() {
+			let loginId = $('input[name=loginId]').val().trim();
+			let password = $('input[name=password]').val();
+			let confirmPassword = $('input[name=confirmPassword]').val();
+			let name = $('input[name=name]').val().trim();
+			let email = $('input[name=email]').val().trim();
+			
+			if (loginId == '') {
+				alert("아이디를 입력하세요");
+				return;
+			}
+			
+			if ($('#idCheckOk').hasClass('d-none')) {
+				alert("아이디 중복확인을 다시 해주세요");
+				return;
+			}
+			
+			if (password == '' || confirmPassword == '') {
+				alert("비밀번호를 입력하세요");
+				return;
+			}
+			
+			if (password != confirmPassword) {
+				alert("비밀번호가 일치하지 않습니다");
+				return;
+			}
+			
+			if (name == '') {
+				alert("이름을 입력하세요");
+				return;
+			}
+			
+			if (email == '') {
+				alert("이메일을 입력하세요");
+				return;
+			}
+			
+			let url = $('#signUpForm').attr('action');
+			let params = $('#signUpForm').serialize();
+			
+			$.post(url, params)
+			.done(function(data) {
+				if (data.code == 1) {
+					alert("가입을 환영합니다! 로그인 해주세요");
+					location.href = "/user/sign_in_view";
+				} else {
+					alert(data.errorMessage);
+				}
+			});
+		});
+	});
+</script>
