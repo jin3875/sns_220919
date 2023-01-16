@@ -10,7 +10,7 @@
 	
 	<%-- 로그인 정보 --%>
 	<c:if test="${not empty userId}">
-		<div class="login-info d-flex align-items-end mb-3 mr-5">
+		<div class="login-info d-flex align-items-end mb-3 mr-3">
 			<span class="text-white">${userName}님 안녕하세요</span>
 			<a href="/user/sign_out" class="ml-2 text-white font-weight-bold">로그아웃</a>
 		</div>

@@ -10,7 +10,6 @@ header {height:80px; background-color:#ededed;}
 .sign-up-subject {margin:20px; font-weight:bold;}
 
 .shadow-box {width:550px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
-.login-box {width:400px;}
 
-.contents-box {width:650px;}
-#writeTextArea {height:100px;}
+.post-box {width:500px; margin:0 auto;}
+.timeline-box {width:500px; margin:0 auto;}
