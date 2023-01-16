@@ -11,5 +11,5 @@ header {height:80px; background-color:#ededed;}
 
 .shadow-box {width:550px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
 
-.post-box {width:500px; margin:0 auto;}
-.timeline-box {width:500px; margin:0 auto;}
+.contents-box {width:650px;}
+#writeTextArea {height:100px;}
