@@ -77,3 +77,16 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('#writeBtn').on('click', function() {
+			let content = $('#writeTextArea').val();
+			
+			if (content == '') {
+				alert("내용을 입력하세요");
+				return;
+			}
+		});
+	});
+</script>
