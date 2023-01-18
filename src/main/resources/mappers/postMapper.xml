@@ -28,4 +28,17 @@
 			, NOW()
 		)
 	</insert>
+	
+	<select id="selectPostList" resultType="com.sns.post.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		ORDER BY `id` DESC
+	</select>
 </mapper>
