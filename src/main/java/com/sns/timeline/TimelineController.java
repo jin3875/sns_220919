@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sns.comment.bo.CommentBO;
+import com.sns.comment.model.Comment;
 import com.sns.post.bo.PostBO;
 import com.sns.post.model.Post;
 
@@ -18,13 +20,18 @@ public class TimelineController {
 	@Autowired
 	private PostBO postBO;
 	
+	@Autowired
+	private CommentBO commentBO;
+	
 	@GetMapping("/timeline_view")
 	public String timelineView(Model model) {
-		model.addAttribute("viewName", "timeline/timeline");
-		
 		List<Post> postList = postBO.getPostList();
 		model.addAttribute("postList", postList);
 		
+		List<Comment> commentList = commentBO.getCommentList();
+		model.addAttribute("commentList", commentList);
+		
+		model.addAttribute("viewName", "timeline/timeline");
 		return "template/layout";
 	}
 

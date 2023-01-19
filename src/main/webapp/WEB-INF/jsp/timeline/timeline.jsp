@@ -26,11 +26,12 @@
 		<%-- 타임라인 --%>
 		<div class="timeline-box my-5">
 			<c:forEach var="post" items="${postList}">
+				<%-- 카드 --%>
 				<div class="card border rounded mt-3">
 					<%-- 글쓴이 & 더보기 버튼 --%>
 					<div class="d-flex justify-content-between p-2">
 						<span class="font-weight-bold">글쓴이</span>
-						<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
+						<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${post.id}">
 							<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="30">
 						</a>
 					</div>
@@ -61,21 +62,25 @@
 					
 					<%-- 댓글 목록 --%>
 					<div class="card-comment-list m-2">
-						<div class="card-comment m-1">
-							<span class="font-weight-bold">댓글쓴이 :</span>
-							<span>댓글 내용11111</span>
-							
-							<%-- 댓글 삭제 버튼 --%>
-							<a href="#" class="commentDelBtn">
-								<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10" height="10">
-							</a>
-						</div>
+						<c:forEach var="comment" items="${commentList}">
+							<div class="card-comment m-1">
+								<span class="font-weight-bold">${comment.userId}</span>
+								<span>${comment.content}</span>
+								
+								<%-- 댓글 삭제 버튼 --%>
+								<a href="#" class="commentDelBtn">
+									<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10" height="10">
+								</a>
+							</div>
+						</c:forEach>
 						
 						<%-- 댓글 쓰기 --%>
-						<div class="comment-write d-flex border-top mt-2">
-							<input type="text" class="form-control border-0 mr-2" placeholder="댓글 달기"> 
-							<button type="button" class="comment-btn btn btn-light" data-post-id="${card.post.id}">게시</button>
-						</div>
+						<c:if test="${not empty userId}">
+							<div class="comment-write d-flex border-top mt-2">
+								<input type="text" class="form-control border-0 mr-2" placeholder="댓글 달기"> 
+								<button type="button" class="comment-btn btn btn-light" data-post-id="${post.id}">게시</button>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
@@ -145,6 +150,36 @@
 				}
 				, error:function(e) {
 					alert("게시에 실패하였습니다");
+				}
+			});
+		});
+		
+		// 댓글 작성
+		$('.comment-btn').on('click', function() {
+			let postId = $(this).data('post-id');
+			let content = $(this).siblings('input').val().trim(); // 지금 클릭된 게시버튼의 형제인 input 태그를 가져온다.
+			
+			if (content == '') {
+				alert("댓글을 입력하세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"POST"
+				, url:"/comment/create"
+				, data:{"postId":postId, "content":content}
+				
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("댓글이 게시되었습니다");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(jqXHR, textStatus, errorThrown) {
+					let errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
 				}
 			});
 		});
