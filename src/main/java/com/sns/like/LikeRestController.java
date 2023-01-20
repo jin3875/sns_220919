@@ -27,20 +27,20 @@ public class LikeRestController {
 		int userId = (int)session.getAttribute("userId");
 		
 		if (likeBO.isLiked(userId, postId)) {
-			if (likeBO.addLike(userId, postId) > 0) {
-				result.put("code", 1);
-				result.put("result", "성공");
-			} else {
-				result.put("code", 500);
-				result.put("errorMessage", "좋아요 추가에 실패했습니다");
-			}
-		} else {
 			if (likeBO.removeLike(userId, postId) > 0) {
 				result.put("code", 1);
 				result.put("result", "성공");
 			} else {
 				result.put("code", 500);
 				result.put("errorMessage", "좋아요 취소에 실패했습니다");
+			}
+		} else {
+			if (likeBO.addLike(userId, postId) > 0) {
+				result.put("code", 1);
+				result.put("result", "성공");
+			} else {
+				result.put("code", 500);
+				result.put("errorMessage", "좋아요 추가에 실패했습니다");
 			}
 		}
 		

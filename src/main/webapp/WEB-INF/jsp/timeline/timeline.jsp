@@ -44,8 +44,15 @@
 					<%-- 좋아요 --%>
 					<div class="card-like m-3">
 						<a href="/like/${card.post.id}" class="like-btn">
-							<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
-							좋아요 10개
+							<c:choose>
+								<c:when test="${card.filledLike}">
+									<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18" height="18" alt="filled heart">
+								</c:when>
+								<c:otherwise>
+									<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
+								</c:otherwise>
+							</c:choose>
+							좋아요 ${card.countLike}개
 						</a>
 					</div>
 					
@@ -173,6 +180,28 @@
 				, success:function(data) {
 					if (data.code == 1) {
 						alert("댓글이 게시되었습니다");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(jqXHR, textStatus, errorThrown) {
+					let errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+		});
+		
+		$('.like-btn').on('click', function(e) {
+			e.preventDefault();
+			let url = $(this).attr('href');
+			
+			$.ajax({
+				type:"GET"
+				, url:url
+				
+				, success:function(data) {
+					if (data.code == 1) {
 						location.reload();
 					} else {
 						alert(data.errorMessage);
