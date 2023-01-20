@@ -22,7 +22,7 @@
 		)
 	</insert>
 	
-	<select id="selectCommentList" resultType="com.sns.comment.model.Comment">
+	<select id="selectCommentListByPostId" parameterType="int" resultType="com.sns.comment.model.Comment">
 		SELECT
 			`id`
 			,`postId`
@@ -32,6 +32,8 @@
 			,`updatedAt`
 		FROM
 			`comment`
+		WHERE
+			`postId` = #{postId}
 		ORDER BY `id` DESC
 	</select>
 </mapper>
