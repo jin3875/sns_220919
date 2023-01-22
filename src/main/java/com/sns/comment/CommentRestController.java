@@ -20,6 +20,13 @@ public class CommentRestController {
 	@Autowired
 	private CommentBO commentBO;
 	
+	/**
+	 * 댓글 작성 API
+	 * @param postId
+	 * @param content
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> createComment(
 			@RequestParam("postId") int postId,

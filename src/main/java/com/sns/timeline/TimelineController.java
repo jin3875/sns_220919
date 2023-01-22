@@ -21,6 +21,11 @@ public class TimelineController {
 	@Autowired
 	private TimelineBO timelineBO;
 	
+	/**
+	 * 타임라인 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/timeline_view")
 	public String timelineView(Model model) {
 //		List<Post> postList = postBO.getPostList();

@@ -21,6 +21,13 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
+	/**
+	 * 글 작성 API
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("content") String content,
@@ -29,8 +36,15 @@ public class PostRestController {
 	) {
 		Map<String, Object> result = new HashMap<>();
 		
-		int userId = (int)session.getAttribute("userId");
+		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
+		
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 해주세요");
+			return result;
+		}
 		
 		int rowCount = postBO.addPost(userId, userLoginId, content, file);
 		
