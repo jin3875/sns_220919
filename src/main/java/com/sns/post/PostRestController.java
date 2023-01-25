@@ -46,6 +46,7 @@ public class PostRestController {
 			return result;
 		}
 		
+		// 글 추가
 		int rowCount = postBO.addPost(userId, userLoginId, content, file);
 		
 		if (rowCount > 0) {

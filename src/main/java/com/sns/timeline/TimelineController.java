@@ -17,9 +17,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class TimelineController {
 	
-//	@Autowired
-//	private PostBO postBO;
-	
 	@Autowired
 	private TimelineBO timelineBO;
 	
@@ -30,9 +27,7 @@ public class TimelineController {
 	 */
 	@GetMapping("/timeline_view")
 	public String timelineView(Model model, HttpSession session) {
-//		List<Post> postList = postBO.getPostList();
-//		model.addAttribute("postList", postList);
-		
+		// 카드 목록
 		List<CardView> cardList = timelineBO.generateCardList((Integer)session.getAttribute("userId"));
 		model.addAttribute("cardList", cardList);
 		

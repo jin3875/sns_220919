@@ -19,12 +19,14 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
+	// 글 추가
 	public int addPost(int userId, String userLoginId, String content, MultipartFile file) {
 		String imagePath = fileManagerService.saveFile(userLoginId, file);
 		
 		return postDAO.insertPost(userId, content, imagePath);
 	}
 	
+	// 글 목록
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
 	}

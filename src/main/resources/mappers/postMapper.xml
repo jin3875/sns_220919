@@ -10,6 +10,7 @@
 			`post`
 	</select>
 	
+	<!-- 글 추가 -->
 	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`
 		(
@@ -29,6 +30,7 @@
 		)
 	</insert>
 	
+	<!-- 글 목록 -->
 	<select id="selectPostList" resultType="com.sns.post.model.Post">
 		SELECT
 			`id`

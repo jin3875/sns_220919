@@ -43,6 +43,7 @@ public class CommentRestController {
 			return result;
 		}
 		
+		// 댓글 추가
 		int rowCount = commentBO.addComment(postId, userId, content);
 		
 		if (rowCount > 0) {

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <div class="d-flex justify-content-center">
+	<!-- 로그인 박스 -->
 	<div class="shadow-box m-5">
 		<div class="d-flex justify-content-center m-5">
 			<form id="loginForm" action="/user/sign_in" method="post">
@@ -28,6 +29,7 @@
 
 <script>
 	$(document).ready(function() {
+		// 로그인
 		$('#loginForm').on('submit', function(e) {
 			e.preventDefault();
 			

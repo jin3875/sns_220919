@@ -13,11 +13,13 @@ public interface PostDAO {
 	
 	public List<Map<String, Object>> selectPostListTEST();
 	
+	// 글 추가
 	public int insertPost(
 			@Param("userId") int userId,
 			@Param("content") String content,
 			@Param("imagePath") String imagePath);
 	
+	// 글 목록
 	public List<Post> selectPostList();
 
 }

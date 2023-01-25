@@ -86,7 +86,7 @@
 							</div>
 						</c:forEach>
 						
-						<%-- 댓글 쓰기 --%>
+						<%-- 댓글 작성 --%>
 						<c:if test="${not empty userId}">
 							<div class="comment-write d-flex border-top mt-2">
 								<input type="text" class="form-control border-0 mr-2" placeholder="댓글 달기"> 
@@ -110,10 +110,8 @@
 		
 		// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드된 파일 이름 노출
 		$('#file').on('change', function(e) {
-			let fileName = e.target.files[0].name;
-			// alert(fileName); // 파일이름.확장자
+			let fileName = e.target.files[0].name; // 파일이름.확장자
 			
-			// 확장자 유효성 확인
 			let ext = fileName.split(".").pop().toLowerCase();
 			if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
 				alert("이미지 파일만 업로드 할 수 있습니다");
@@ -122,10 +120,10 @@
 				return;
 			}
 			
-			// 유효성 통과한 이미지는 상자에 업로드된 파일 이름 노출
-			$('#fileName').text(fileName);
+			$('#fileName').text(fileName); // 상자에 업로드된 파일 이름 노출
 		});
 		
+		// 글 작성
 		$('#writeBtn').on('click', function() {
 			let content = $('#writeTextArea').val();
 			let file = $('#file').val();
@@ -148,6 +146,7 @@
 				type:"POST"
 				, url:"/post/create"
 				, data:formData
+				// 파일 업로드를 위한 필수 설정
 				, enctype:"multipart/form-data"
 				, processData:false
 				, contentType:false
@@ -169,7 +168,7 @@
 		// 댓글 작성
 		$('.comment-btn').on('click', function() {
 			let postId = $(this).data('post-id');
-			let content = $(this).siblings('input').val().trim(); // 지금 클릭된 게시버튼의 형제인 input 태그를 가져온다.
+			let content = $(this).siblings('input').val().trim(); // 지금 클릭된 게시버튼의 형제인 input 태그를 가져옴
 			
 			if (content == '') {
 				alert("댓글을 입력하세요");
@@ -196,7 +195,7 @@
 			});
 		});
 		
-		// 좋아요 추가/해제
+		// 좋아요 추가&해제
 		$('.like-btn').on('click', function(e) {
 			e.preventDefault();
 			

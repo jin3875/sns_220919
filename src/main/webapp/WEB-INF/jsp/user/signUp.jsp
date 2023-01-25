@@ -4,6 +4,8 @@
 <div class="d-flex justify-content-center">
 	<div class="sign-up-box">
 		<h1 class="m-4 font-weight-bold">회원가입</h1>
+		
+		<!-- 회원가입 박스 -->
 		<form id="signUpForm" method="post" action="/user/sign_up">
 			<span class="sign-up-subject">ID</span>
 			<div class="d-flex ml-3 mt-3">
@@ -81,6 +83,7 @@
 			});
 		});
 		
+		// 회원가입
 		$('#signUpBtn').on('click', function() {
 			let loginId = $('input[name=loginId]').val().trim();
 			let password = $('input[name=password]').val();

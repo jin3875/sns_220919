@@ -33,7 +33,9 @@ public class UserRestController {
 	) {
 		Map<String, Object> result = new HashMap<>();
 		
+		// loginId 존재 유무
 		boolean isDuplicated = userBO.existLoginId(loginId);
+		
 		if (isDuplicated) {
 			result.put("code", 1);
 			result.put("result", true);
@@ -64,7 +66,9 @@ public class UserRestController {
 		
 		String hashedPassword = EncryptUtils.md5(password);
 		
+		// 유저 추가
 		userBO.addUser(loginId, hashedPassword, name, email);
+		
 		result.put("code", 1);
 		result.put("result", "성공");
 		
@@ -86,8 +90,10 @@ public class UserRestController {
 	) {
 		Map<String, Object> result = new HashMap<>();
 		
+		// password 암호화
 		String hashedPassword = EncryptUtils.md5(password);
 		
+		// loginId와 password로 유저 select
 		User user = userBO.getUserByLoginIdPassword(loginId, hashedPassword);
 		
 		if (user != null) {

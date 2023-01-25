@@ -18,6 +18,12 @@ public class LikeRestController {
 	@Autowired
 	private LikeBO likeBO;
 	
+	/**
+	 * 좋아요 API
+	 * @param postId
+	 * @param session
+	 * @return
+	 */
 	// 1) /like?postId=13 -> @RequestParam
 	// 2) /like/13 -> @PathVariable
 	@GetMapping("/like/{postId}")
@@ -32,6 +38,7 @@ public class LikeRestController {
 			return result;
 		}
 		
+		// 좋아요 추가 <-> 삭제
 		likeBO.likeToggle(userId, postId);
 		
 		result.put("code", 1);
