@@ -43,17 +43,21 @@
 					
 					<%-- 좋아요 --%>
 					<div class="card-like m-3">
-						<a href="/like/${card.post.id}" class="like-btn">
-							<c:choose>
-								<c:when test="${card.filledLike}">
+						<c:choose>
+							<%-- 좋아요가 되어있을 때 --%>
+							<c:when test="${card.filledLike eq true}">
+								<a href="#" class="like-btn" data-user-id="${userId}" data-post-id="${card.post.id}">
 									<img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="18" height="18" alt="filled heart">
-								</c:when>
-								<c:otherwise>
+								</a>
+							</c:when>
+							<%-- 좋아요가 해제되어 있을 때 --%>
+							<c:otherwise>
+								<a href="#" class="like-btn" data-user-id="${userId}" data-post-id="${card.post.id}">
 									<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
-								</c:otherwise>
-							</c:choose>
-							좋아요 ${card.countLike}개
-						</a>
+								</a>
+							</c:otherwise>
+						</c:choose>
+						좋아요 ${card.likeCount}개
 					</div>
 					
 					<%-- 글 --%>
@@ -192,13 +196,21 @@
 			});
 		});
 		
+		// 좋아요 추가/해제
 		$('.like-btn').on('click', function(e) {
 			e.preventDefault();
-			let url = $(this).attr('href');
+			
+			let userId = $(this).data('user-id');
+			let postId = $(this).data('post-id');
+			
+			if (userId == '') {
+				alert("로그인을 해주세요");
+				return;
+			}
 			
 			$.ajax({
 				type:"GET"
-				, url:url
+				, url:"/like/" + postId
 				
 				, success:function(data) {
 					if (data.code == 1) {

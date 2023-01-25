@@ -31,7 +31,7 @@ public class TimelineBO {
 	private LikeBO likeBO;
 	
 	// 로그인이 되지 않은 사람도 카드 목록이 보여야 한다.
-	public List<CardView> generateCardList() {
+	public List<CardView> generateCardList(Integer userId) {
 		List<CardView> cardViewList = new ArrayList<>();
 		
 		// 글 목록 가져오기 (post)
@@ -53,10 +53,10 @@ public class TimelineBO {
 			card.setCommentList(commentList);
 			
 			// 좋아요
-			card.setFilledLike(likeBO.isLiked(post.getUserId(), post.getId()));
+			card.setFilledLike(likeBO.existLike(userId, post.getId()));
 			
 			// 좋아요 개수
-			card.setCountLike(likeBO.countLike(post.getId()));
+			card.setLikeCount(likeBO.getLikeCountByPostId(post.getId()));
 			
 			cardViewList.add(card);
 		}

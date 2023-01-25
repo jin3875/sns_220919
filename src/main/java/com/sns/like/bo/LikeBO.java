@@ -11,20 +11,24 @@ public class LikeBO {
 	@Autowired
 	private LikeDAO likeDAO;
 	
-	public boolean isLiked(int userId, int postId) {
-		return likeDAO.isLiked(userId, postId);
+	public void likeToggle(int userId, int postId) {
+		if (likeDAO.selectLikeCountByPostIdOrUserId(userId, postId) > 0) {
+			likeDAO.deleteLikeByPostIdUserId(userId, postId);
+		} else {
+			likeDAO.insertLike(userId, postId);
+		}
 	}
 	
-	public int addLike(int userId, int postId) {
-		return likeDAO.insertLike(userId, postId);
+	public boolean existLike(Integer userId, int postId) {
+		if (userId == null) { // 비로그인
+			return false;
+		}
+		
+		return likeDAO.selectLikeCountByPostIdOrUserId(userId, postId) > 0 ? true : false; // 로그인
 	}
 	
-	public int removeLike(int userId, int postId) {
-		return likeDAO.deleteLike(userId, postId);
-	}
-	
-	public int countLike(int postId) {
-		return likeDAO.countLike(postId);
+	public int getLikeCountByPostId(int postId) {
+		return likeDAO.selectLikeCountByPostIdOrUserId(null, postId);
 	}
 
 }

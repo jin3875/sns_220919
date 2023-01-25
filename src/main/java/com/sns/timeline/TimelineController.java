@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sns.timeline.bo.TimelineBO;
 import com.sns.timeline.model.CardView;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/timeline")
 @Controller
 public class TimelineController {
@@ -27,11 +29,11 @@ public class TimelineController {
 	 * @return
 	 */
 	@GetMapping("/timeline_view")
-	public String timelineView(Model model) {
+	public String timelineView(Model model, HttpSession session) {
 //		List<Post> postList = postBO.getPostList();
 //		model.addAttribute("postList", postList);
 		
-		List<CardView> cardList = timelineBO.generateCardList();
+		List<CardView> cardList = timelineBO.generateCardList((Integer)session.getAttribute("userId"));
 		model.addAttribute("cardList", cardList);
 		
 		model.addAttribute("viewName", "timeline/timeline");

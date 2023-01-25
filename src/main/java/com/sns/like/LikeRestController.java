@@ -24,25 +24,18 @@ public class LikeRestController {
 	public Map<String, Object> like(@PathVariable int postId, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		
-		int userId = (int)session.getAttribute("userId");
+		Integer userId = (Integer)session.getAttribute("userId");
 		
-		if (likeBO.isLiked(userId, postId)) {
-			if (likeBO.removeLike(userId, postId) > 0) {
-				result.put("code", 1);
-				result.put("result", "성공");
-			} else {
-				result.put("code", 500);
-				result.put("errorMessage", "좋아요 취소에 실패했습니다");
-			}
-		} else {
-			if (likeBO.addLike(userId, postId) > 0) {
-				result.put("code", 1);
-				result.put("result", "성공");
-			} else {
-				result.put("code", 500);
-				result.put("errorMessage", "좋아요 추가에 실패했습니다");
-			}
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 해주세요");
+			return result;
 		}
+		
+		likeBO.likeToggle(userId, postId);
+		
+		result.put("code", 1);
+		result.put("result", "성공");
 		
 		return result;
 	}

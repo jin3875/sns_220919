@@ -22,7 +22,7 @@ public class CardView {
 	private boolean filledLike;
 	
 	// 좋아요 개수
-	private int countLike;
+	private int likeCount;
 	
 	public Post getPost() {
 		return post;
@@ -56,12 +56,12 @@ public class CardView {
 		this.filledLike = filledLike;
 	}
 
-	public int getCountLike() {
-		return countLike;
+	public int getLikeCount() {
+		return likeCount;
 	}
 
-	public void setCountLike(int countLike) {
-		this.countLike = countLike;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 
 }
