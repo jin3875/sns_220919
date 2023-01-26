@@ -23,17 +23,21 @@ public class PostBO {
 	private PostDAO postDAO;
 	
 	@Autowired
-	private FileManagerService fileManagerService;
-	
-	@Autowired
 	private CommentBO commentBO;
 	
 	@Autowired
 	private LikeBO likeBO;
 	
+	@Autowired
+	private FileManagerService fileManagerService;
+	
 	// 글 추가
 	public int addPost(int userId, String userLoginId, String content, MultipartFile file) {
-		String imagePath = fileManagerService.saveFile(userLoginId, file);
+		String imagePath = null;
+		
+		if (file != null) {
+			imagePath = fileManagerService.saveFile(userLoginId, file);
+		}
 		
 		return postDAO.insertPost(userId, content, imagePath);
 	}
@@ -45,7 +49,7 @@ public class PostBO {
 	
 	// 글 삭제
 	public int deletePostByPostIdUserId(int postId, int userId) {
-		// 기존 글 가져오기
+		// 기존 글
 		Post post = getPostByPostIdUserId(postId, userId);
 		
 		if (post == null) {
@@ -54,7 +58,9 @@ public class PostBO {
 		}
 		
 		// 이미지 삭제
-		fileManagerService.deleteFile(post.getImagePath());
+		if (post.getImagePath() != null) {
+			fileManagerService.deleteFile(post.getImagePath());
+		}
 		
 		// 댓글 삭제
 		commentBO.deleteCommentListByPostId(postId);

@@ -58,6 +58,12 @@ public class CommentRestController {
 		return result;
 	}
 	
+	/**
+	 * 댓글 삭제 API
+	 * @param commentId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("commentId") int commentId,
@@ -67,6 +73,7 @@ public class CommentRestController {
 		
 		int userId = (int)session.getAttribute("userId");
 		
+		// 댓글 삭제
 		int rowCount = commentBO.deleteCommentByCommentIdUserId(commentId, userId);
 		
 		if (rowCount > 0) {

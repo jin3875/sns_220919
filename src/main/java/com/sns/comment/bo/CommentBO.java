@@ -31,9 +31,7 @@ public class CommentBO {
 		return commentDAO.selectCommentListByPostId(postId);
 	}
 	
-	// postId의 CommentView 목록
-	// input : 글번호
-	// output : 글번호에 해당하는 댓글목록(+ 댓글쓴이 정보)을 가져온다.
+	// postId의 CommentView 목록 - input : 글번호 / output : 글번호에 해당하는 댓글목록 (+ 댓글쓴이 정보)
 	public List<CommentView> generateCommentViewListByPostId(int postId) {
 		List<CommentView> commentViewList = new ArrayList<>();
 		
@@ -46,7 +44,7 @@ public class CommentBO {
 			// 댓글 1개
 			commentView.setComment(comment);
 			
-			// 댓글쓴이 - id로 유저 select
+			// 댓글쓴이
 			User user = userBO.getUserById(comment.getUserId());
 			commentView.setUser(user);
 			

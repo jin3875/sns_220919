@@ -7,6 +7,7 @@ public class EncryptUtils {
 	
 	public static String md5(String message) {
 		String encData = "";
+		
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			
@@ -20,6 +21,7 @@ public class EncryptUtils {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		
 		return encData;
 	}
 

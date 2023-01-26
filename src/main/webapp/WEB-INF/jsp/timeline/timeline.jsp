@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-center">
 	<div class="contents-box">
-		<%-- 글 작성 : 로그인된 상태에서만 보여짐 --%>
+		<%-- 글 작성 : 로그인된 상태에서만 노출 --%>
 		<c:if test="${not empty userId}">
 			<div class="write-box border rounded m-3">
 				<textarea id="writeTextArea" placeholder="내용을 입력해주세요" class="w-100 border-0"></textarea>
@@ -134,8 +134,8 @@
 		// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드된 파일 이름 노출
 		$('#file').on('change', function(e) {
 			let fileName = e.target.files[0].name; // 파일이름.확장자
-			
 			let ext = fileName.split(".").pop().toLowerCase();
+			
 			if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
 				alert("이미지 파일만 업로드 할 수 있습니다");
 				$('#file').val(''); // 파일 태그의 실제 파일 제거

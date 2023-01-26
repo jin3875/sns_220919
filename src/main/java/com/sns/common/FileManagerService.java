@@ -26,6 +26,7 @@ public class FileManagerService {
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
 		File directory = new File(filePath);
+		
 		if (directory.mkdir() == false) {
 			return null;
 		}

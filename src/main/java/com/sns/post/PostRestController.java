@@ -61,6 +61,12 @@ public class PostRestController {
 		return result;
 	}
 	
+	/**
+	 * 글 삭제 API
+	 * @param postId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId,
@@ -70,6 +76,7 @@ public class PostRestController {
 		
 		int userId = (int)session.getAttribute("userId");
 		
+		// 글 삭제
 		int rowCount = postBO.deletePostByPostIdUserId(postId, userId);
 		
 		if (rowCount > 0) {

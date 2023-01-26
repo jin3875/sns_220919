@@ -30,8 +30,7 @@ public class LikeBO {
 			return false;
 		}
 		
-		// 로그인
-		// postId & userId의 좋아요 개수
+		// 로그인 - postId & userId의 좋아요 개수
 		return likeDAO.selectLikeCountByPostIdOrUserId(userId, postId) > 0 ? true : false;
 	}
 	

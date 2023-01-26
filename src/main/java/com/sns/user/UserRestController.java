@@ -64,6 +64,7 @@ public class UserRestController {
 	) {
 		Map<String, Object> result = new HashMap<>();
 		
+		// password 암호화
 		String hashedPassword = EncryptUtils.md5(password);
 		
 		// 유저 추가
