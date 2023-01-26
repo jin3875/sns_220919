@@ -43,4 +43,30 @@
 			`post`
 		ORDER BY `id` DESC
 	</select>
+	
+	<!-- 글 삭제 -->
+	<delete id="deletePostByPostIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<!-- userId의 postId 글 -->
+	<select id="selectPostByPostIdUserId" parameterType="map" resultType="com.sns.post.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</select>
 </mapper>

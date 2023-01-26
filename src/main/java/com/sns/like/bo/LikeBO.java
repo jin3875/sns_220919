@@ -37,8 +37,12 @@ public class LikeBO {
 	
 	// postId의 좋아요 개수
 	public int getLikeCountByPostId(int postId) {
-		// postId의 좋아요 개수
 		return likeDAO.selectLikeCountByPostIdOrUserId(null, postId);
+	}
+	
+	// postId의 좋아요 삭제
+	public void deleteLikeByPostId(int postId) {
+		likeDAO.deleteLikeByPostId(postId);
 	}
 
 }

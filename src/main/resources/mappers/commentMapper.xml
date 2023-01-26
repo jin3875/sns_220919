@@ -38,4 +38,23 @@
 			`postId` = #{postId}
 		ORDER BY `id` DESC
 	</select>
+	
+	<!-- postId의 댓글 삭제 -->
+	<delete id="deleteCommentListByPostId" parameterType="int">
+		DELETE
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteCommentByCommentIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`comment`
+		WHERE
+			`id` = #{commentId}
+			AND `userId` = #{userId}
+	</delete>
 </mapper>
