@@ -13,7 +13,7 @@
 			`postId` = #{postId}
 			
 			<if test="userId != null">
-				AND `userId` = #{userId}
+			AND `userId` = #{userId}
 			</if>
 	</select>
 	
