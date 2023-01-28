@@ -36,13 +36,7 @@ public class CommentRestController {
 	) {
 		Map<String, Object> result = new HashMap<>();
 		
-		Integer userId = (Integer)session.getAttribute("userId");
-		
-		if (userId == null) {
-			result.put("code", 500);
-			result.put("errorMessage", "로그인을 다시 해주세요.");
-			return result;
-		}
+		int userId = (int)session.getAttribute("userId");
 		
 		// 댓글 추가
 		int rowCount = commentBO.addComment(postId, userId, content);

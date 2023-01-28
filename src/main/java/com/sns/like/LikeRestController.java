@@ -30,13 +30,7 @@ public class LikeRestController {
 	public Map<String, Object> like(@PathVariable int postId, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		
-		Integer userId = (Integer)session.getAttribute("userId");
-		
-		if (userId == null) {
-			result.put("code", 500);
-			result.put("errorMessage", "로그인을 해주세요");
-			return result;
-		}
+		int userId = (int)session.getAttribute("userId");
 		
 		// 좋아요 추가 <-> 삭제
 		likeBO.likeToggle(userId, postId);
