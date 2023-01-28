@@ -13,24 +13,24 @@ public class LikeBO {
 	
 	// 좋아요 추가 <-> 삭제
 	public void likeToggle(int userId, int postId) {
-		// postId & userId의 좋아요 개수
+		// postId의 userId 좋아요 개수
 		if (likeDAO.selectLikeCountByPostIdOrUserId(userId, postId) > 0) {
-			// 좋아요 삭제
-			likeDAO.deleteLikeByPostIdUserId(userId, postId);
+			// postId의 userId 좋아요 삭제
+			likeDAO.deleteLikeByPostIdOrUserId(userId, postId);
 		} else {
-			// 좋아요 추가
+			// postId의 userId 좋아요 추가
 			likeDAO.insertLike(userId, postId);
 		}
 	}
 	
-	// 좋아요 유무
+	// postId의 userId 좋아요 유무
 	public boolean existLike(Integer userId, int postId) {
 		// 비로그인
 		if (userId == null) {
 			return false;
 		}
 		
-		// 로그인 - postId & userId의 좋아요 개수
+		// 로그인 - postId의 userId 좋아요 개수
 		return likeDAO.selectLikeCountByPostIdOrUserId(userId, postId) > 0 ? true : false;
 	}
 	
@@ -41,7 +41,7 @@ public class LikeBO {
 	
 	// postId의 좋아요 삭제
 	public void deleteLikeByPostId(int postId) {
-		likeDAO.deleteLikeByPostId(postId);
+		likeDAO.deleteLikeByPostIdOrUserId(null, postId);
 	}
 
 }

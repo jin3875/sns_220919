@@ -10,7 +10,6 @@ public class EncryptUtils {
 		
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			
 			byte[] bytes = message.getBytes();
 			md.update(bytes);
 			byte[] digest = md.digest();

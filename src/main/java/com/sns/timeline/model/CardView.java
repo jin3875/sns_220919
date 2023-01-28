@@ -6,19 +6,18 @@ import com.sns.comment.model.CommentView;
 import com.sns.post.model.Post;
 import com.sns.user.model.User;
 
-// View용 객체
 public class CardView {
 	
-	// 글 1개
+	// 글
 	private Post post;
 	
-	// 글쓴이 정보
+	// 글쓴이
 	private User user;
 	
-	// 댓글 N개
+	// 댓글
 	private List<CommentView> commentList;
 	
-	// 로그인된 사람이 좋아요를 눌렀는지 (boolean)
+	// 로그인 유저의 좋아요 유무
 	private boolean filledLike;
 	
 	// 좋아요 개수

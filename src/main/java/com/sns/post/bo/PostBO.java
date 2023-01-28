@@ -49,7 +49,6 @@ public class PostBO {
 	
 	// 글 삭제
 	public int deletePostByPostIdUserId(int postId, int userId) {
-		// 기존 글
 		Post post = getPostByPostIdUserId(postId, userId);
 		
 		if (post == null) {

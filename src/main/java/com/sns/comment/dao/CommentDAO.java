@@ -22,7 +22,7 @@ public interface CommentDAO {
 	// postId의 댓글 삭제
 	public void deleteCommentListByPostId(int postId);
 	
-	// 댓글 삭제
+	// 본인 댓글 삭제
 	public int deleteCommentByCommentIdUserId(
 			@Param("commentId") int commentId,
 			@Param("userId") int userId);

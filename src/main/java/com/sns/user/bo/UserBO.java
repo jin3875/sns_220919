@@ -22,7 +22,7 @@ public class UserBO {
 		userDAO.insertUser(loginId, password, name, email);
 	}
 	
-	// loginId와 password로 유저 select
+	// 유저 검색
 	public User getUserByLoginIdPassword(String loginId, String password) {
 		return userDAO.selectUserByLoginIdPassword(loginId, password);
 	}

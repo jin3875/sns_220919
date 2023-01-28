@@ -18,7 +18,7 @@ public interface UserDAO {
 			@Param("name") String name,
 			@Param("email") String email);
 	
-	// loginId와 password로 유저 select
+	// 유저 검색
 	public User selectUserByLoginIdPassword(
 			@Param("loginId") String loginId,
 			@Param("password") String password);

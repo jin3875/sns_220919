@@ -49,7 +49,7 @@
 
 <script>
 	$(document).ready(function() {
-		// 아이디 중복확인 버튼
+		// 중복확인 버튼
 		$('#loginIdCheckBtn').on('click', function() {
 			$('#idCheckLength').addClass('d-none');
 			$('#idCheckDuplicated').addClass('d-none');
@@ -63,7 +63,8 @@
 			}
 			
 			$.ajax({
-				url:"/user/is_duplicated_id"
+				type:"GET"
+				, url:"/user/is_duplicated_id"
 				, data:{"loginId":loginId}
 				
 				, success:function(data) {

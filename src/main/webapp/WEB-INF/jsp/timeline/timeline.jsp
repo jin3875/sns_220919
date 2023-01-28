@@ -108,8 +108,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal">
-	<%-- modal-sm : 작은 모달 창 --%>
-	<%-- modal-dialog-centered : 모달 창 수직으로 가운데 정렬 --%>
+	<%-- modal-sm : 작은 모달 창 / modal-dialog-centered : 모달 창 수직으로 가운데 정렬 --%>
 	<div class="modal-dialog modal-sm modal-dialog-centered">
 		<div class="modal-content text-center">
 			<div class="py-3 border-bottom">
@@ -125,25 +124,25 @@
 
 <script>
 	$(document).ready(function() {
-		// 파일 업로드 이미지 클릭 -> 숨겨져 있는 file을 동작시킴
+		// 파일 업로드 아이콘
 		$('#fileUploadBtn').on('click', function(e) {
-			e.preventDefault(); // a 태그의 스크롤 올라가는 현상 방지
-			$('#file').click(); // input file을 클릭한 것과 같은 효과
+			e.preventDefault();
+			$('#file').click();
 		});
 		
-		// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드된 파일 이름 노출
+		// 파일 선택
 		$('#file').on('change', function(e) {
-			let fileName = e.target.files[0].name; // 파일이름.확장자
+			let fileName = e.target.files[0].name;
 			let ext = fileName.split(".").pop().toLowerCase();
 			
 			if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
 				alert("이미지 파일만 업로드 할 수 있습니다");
-				$('#file').val(''); // 파일 태그의 실제 파일 제거
-				$('#fileName').text(''); // 파일 이름 비우기
+				$('#file').val('');
+				$('#fileName').text('');
 				return;
 			}
 			
-			$('#fileName').text(fileName); // 상자에 업로드된 파일 이름 노출
+			$('#fileName').text(fileName);
 		});
 		
 		// 글 작성
@@ -191,7 +190,7 @@
 		// 댓글 작성
 		$('.comment-btn').on('click', function() {
 			let postId = $(this).data('post-id');
-			let content = $(this).siblings('input').val().trim(); // 지금 클릭된 게시버튼의 형제인 input 태그를 가져옴
+			let content = $(this).siblings('input').val().trim();
 			
 			if (content == '') {
 				alert("댓글을 입력하세요");
@@ -218,7 +217,7 @@
 			});
 		});
 		
-		// 좋아요 추가&해제
+		// 좋아요 버튼
 		$('.like-btn').on('click', function(e) {
 			e.preventDefault();
 			
@@ -248,15 +247,15 @@
 			});
 		});
 		
-		// 더보기 버튼(...) 클릭
+		// 더보기 버튼 (...)
 		$('.more-btn').on('click', function(e) {
 			e.preventDefault();
 			
-			let postId = $(this).data('post-id'); // getting
-			$('#modal').data('post-id', postId); // setting - 모달 태그에 data-post-id 심어 넣어줌
+			let postId = $(this).data('post-id');
+			$('#modal').data('post-id', postId);
 		});
 		
-		// 모달 안에 있는 삭제하기 버튼 클릭
+		// 모달 안 - 삭제하기 버튼
 		$('#modal #deletePostBtn').on('click', function(e) {
 			e.preventDefault();
 			
@@ -281,7 +280,7 @@
 			});
 		});
 		
-		// 댓글 삭제 버튼 클릭
+		// 댓글 삭제 버튼
 		$('.commentDelBtn').on('click', function(e) {
 			e.preventDefault();
 			

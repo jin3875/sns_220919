@@ -27,13 +27,13 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// 로그인 + /user -> 타임라인 페이지 + return false
+		// 로그인 + /user -> 타임라인 페이지
 		if (userId != null && uri.startsWith("/user")) {
 			response.sendRedirect("/timeline/timeline_view");
-			return false; // 컨트롤러 수행 X
+			return false;
 		}
 		
-		return true; // 컨트롤러 수행
+		return true;
 	}
 	
 	@Override

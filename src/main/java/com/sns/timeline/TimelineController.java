@@ -23,6 +23,7 @@ public class TimelineController {
 	/**
 	 * 타임라인 화면
 	 * @param model
+	 * @param session
 	 * @return
 	 */
 	@GetMapping("/timeline_view")

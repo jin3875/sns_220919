@@ -24,9 +24,7 @@ public class LikeRestController {
 	 * @param session
 	 * @return
 	 */
-	// 1) /like?postId=13 -> @RequestParam
-	// 2) /like/13 -> @PathVariable
-	@GetMapping("/like/{postId}")
+	@GetMapping("/like/{postId}") // ex) /like/13 -> @PathVariable
 	public Map<String, Object> like(@PathVariable int postId, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		

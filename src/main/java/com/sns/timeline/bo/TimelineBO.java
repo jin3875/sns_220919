@@ -30,8 +30,8 @@ public class TimelineBO {
 	@Autowired
 	private LikeBO likeBO;
 	
-	// 카드 목록 - 로그인 안 한 사람도 볼 수 있음
-	public List<CardView> generateCardList(Integer userId) {
+	// 카드 목록
+	public List<CardView> generateCardList(Integer userId) { // 로그아웃 상태도 가능
 		List<CardView> cardViewList = new ArrayList<>();
 		
 		// 글 목록
@@ -47,11 +47,11 @@ public class TimelineBO {
 			User user = userBO.getUserById(post.getUserId());
 			card.setUser(user);
 			
-			// 글 하나에 해당하는 댓글들
+			// 댓글
 			List<CommentView> commentList = commentBO.generateCommentViewListByPostId(post.getId());
 			card.setCommentList(commentList);
 			
-			// 좋아요
+			// 좋아요 유무
 			card.setFilledLike(likeBO.existLike(userId, post.getId()));
 			
 			// 좋아요 개수

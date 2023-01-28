@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +28,8 @@ public class UserRestController {
 	 * @param loginId
 	 * @return
 	 */
-	@RequestMapping("/is_duplicated_id")
-	public Map<String, Object> isDuplicatedId(
-			@RequestParam("loginId") String loginId
-	) {
+	@GetMapping("/is_duplicated_id")
+	public Map<String, Object> isDuplicatedId(@RequestParam("loginId") String loginId) {
 		Map<String, Object> result = new HashMap<>();
 		
 		// loginId 존재 유무
@@ -94,7 +93,7 @@ public class UserRestController {
 		// password 암호화
 		String hashedPassword = EncryptUtils.md5(password);
 		
-		// loginId와 password로 유저 select
+		// 유저 검색
 		User user = userBO.getUserByLoginIdPassword(loginId, hashedPassword);
 		
 		if (user != null) {

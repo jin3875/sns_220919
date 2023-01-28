@@ -35,7 +35,7 @@
 		)
 	</insert>
 	
-	<!-- loginId와 password로 유저 select -->
+	<!-- 유저 검색 -->
 	<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.sns.user.model.User">
 		SELECT
 			`id`
